@@ -34,7 +34,15 @@ class BaseClient(object):
 
         query += '&signature=' + urllib.quote_plus(signature)
 
-        response = urllib2.urlopen(self.api + '?' + query)
+        try:
+            response = urllib2.urlopen(self.api + '?' + query)
+        except urllib2.HTTPError, e:
+            # Cloudstack adds a nice X-Description header
+            msg = "ERROR: code={0}".format(e.code)
+            if e.headers.has_key("X-Description"):
+                msg += ": {0}".format(e.headers["X-Description"])
+            raise RuntimeError(msg)
+
         decoded = json.loads(response.read())
        
         propertyResponse = command.lower() + 'response'
