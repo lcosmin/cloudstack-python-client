@@ -1,6 +1,8 @@
 CloudStack Python Client
 ========================
 
+![unmaintained](https://img.shields.io/badge/status-unmaintained-orange.svg)
+
 Python client library for the CloudStack User API v3.0.0. For older versions,
 see the [tags](https://github.com/jasonhancock/cloudstack-python-client/tags).
 
